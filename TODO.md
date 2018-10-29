@@ -32,4 +32,5 @@
 - [ ] bootstrap/material (css library)
 
 #### My Spin
-(to be filled out by you)
+- [ ] Main focus will be on design and animation. Design will be done through CSS/other libraries 
+- [ ] Learn and utilize animations through jQueryUI or other available libraries
