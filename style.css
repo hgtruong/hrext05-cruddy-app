@@ -1,10 +1,45 @@
-head {
+#pageTitle {
 
-  background-color: blue;
-
+  font-family: 'Apple Chancery';
+  font-size: 300%;
 }
 
 
 body {
 
+  background-image: url('/Users/ht/Desktop/HackReactor/hrext05-cruddy-app/Photos/PageBackgound.png');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  background-size: cover;
+
+}
+
+.textInput {
+  width: 300px;
+  height: 50px;
+
+}
+.calendarPane {
+  font-family: 'Apple Chancery';
+  font-size: 200%;
+  text-align: center;
+  width: 20%;
+  float: left;
+  height: 100%;
+}
+
+.todoPane {
+  text-align: center;
+  width: 60%;
+  float: left;
+  height: 100%;
+
+ }
+
+.qotdPane {
+  text-align: center;
+  width: 20%;
+  float: left;
+  height: 100%;
 }
