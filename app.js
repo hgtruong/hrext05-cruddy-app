@@ -7,41 +7,59 @@ update display with new text value
  */
 
 $(document).ready(function(){
-  console.log("before\n", window.localStorage);
+  console.log('before\n', window.localStorage);
   var todoCounter = 0;
 
+  renderDisplay(localStorage);
   // add event listener
-  $(".addTextBtn").on("click", function(){
-    $(".showText").empty();
+  $('.addTextBtn').on('click', function(){
+    $('.showText').empty();
     todoCounter = localStorage.length;
     var curTextValue = $('#theKey').val(); // reading from <input>
-    var curKeyValue = "theKey" + todoCounter;
+    var curKeyValue = 'theKey' + todoCounter;
     todoCounter++;
     localStorage.setItem(curKeyValue, curTextValue);
+    renderDisplay(localStorage);
 
-    console.log(localStorage);
-    for(var key in localStorage){
-      var todoItem = '';
-      todoItem = `<input type="checkbox" name="${key}" value="${localStorage[key]}"> ${localStorage[key]}<br>`;
-      console.log('todoitem', todoItem);
-      $("#todoList").append(todoItem);
-    }
+/**/
   });
 
   // remove item from app
 
   // listen for click event (del)
-  $(".clearCacheBtn").on("click", function(){
+  $('.clearCacheBtn').on('click', function(){
     // clear local storage
     localStorage.clear();
-    $(".showText").empty();
+    $('.showText').empty();
     todoCounter = 0;
   });
 
-  // Icon for button
+  /// ***** renderDisplay(jsonObject); **********
+  function renderDisplay(localStorage){
+    console.log(localStorage);
+    $('.showText').append('<div id=accordion> </div>');
+    for(var key in localStorage){
+      if(localStorage.hasOwnProperty(key)){
+        var header = $('<h3></h3>');
+        var counter = key.charAt(key.length-1);
+        var todoContent = $('<div></div>');
+        header.html(`${++counter}`);
+        todoContent.html(`<p> ${localStorage[key]} </p>`)
+        $('#accordion').append(header,todoContent);
+      }
+    }
+    $('#accordion').accordion({
+      collapsible: true
+    });
+  }
+
+
   $(function() {
-    $(".addTextBtn").button({icon:"ui-icon-plus"});
-    $(".clearCacheBtn").button({icon:"ui-icon-close"});
+    $('.addTextBtn').button({icon:'ui-icon-plus'});
+    $('.clearCacheBtn').button({icon:'ui-icon-close'});
+    // $('#accordion').accordion({
+    //   // collapsible: true;
+    // });
   });
 
 });
