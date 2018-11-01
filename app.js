@@ -35,7 +35,6 @@ $(document).ready(function(){
       alert('Similar entry found');
     }
     $('#theKey').val('');
-    console.log('local', localStorage);
     renderDisplay(localStorage);
   });
 
@@ -79,23 +78,19 @@ $(document).ready(function(){
     $('#quoteBox').append(quotes[randomNum]);
   }
 
-  function reshuffleLocalStorage(localStorage){
-    var order = 0;
-    var keyName = 'theKey';
-    for(var key in localStorage){
-      console.log('key', key);
-      if(localStorage.hasOwnProperty(key)){
-        console.log('keyName', keyName+order);
-        localStorage.setItem(keyName+order, localStorage[key]);
-        localStorage.removeItem(key, localStorage[key]);
-        ++order;
-
+  function reorderLs(localStorage, deletedLocation){
+    var theKey = 'theKey';
+    var nextIndex = 0;
+    for(var i = deletedLocation; i < localStorage.length;i++){
+        nextIndex = i;
+        ++nextIndex;
+        localStorage.setItem(theKey+i, localStorage[theKey+nextIndex]);
+        if(i === (localStorage.length - 1)){
+          localStorage.removeItem(theKey+i);
+        }
       }
-
-    }
-    console.log('reshuffleLocalStorage', localStorage);
-
   }
+
 
   // addText and clearCache Button
   $(function() {
@@ -108,10 +103,10 @@ $(document).ready(function(){
     var lsLocation = $(this).parent()[0].id;
     var deletedLocation =  Number(lsLocation.charAt(lsLocation.length - 1));
     var deletedKey = 'theKey' + (--deletedLocation);
+    localStorage.removeItem(deletedKey);
     $(this).parent('div').prev('h3').andSelf().remove();
     $('.showText').empty();
-    reshuffleLocalStorage(localStorage);
-    console.log(localStorage);
+    reorderLs(localStorage, deletedLocation);
     renderDisplay(localStorage);
   });
 
