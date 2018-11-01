@@ -24,47 +24,42 @@ p {
 }
 
 #accordion {
-  margin-top: 30px;
+  margin: 30px;
   width: 500px;
-  height: 100px;
+  height: 500px;
   margin: auto;
-  opacity: 0.6;
 }
 
 .addTextBtn {
   opacity: 0.5;
-  margin-bottom: 50px;
 }
 
 .clearCacheBtn {
   opacity: 0.5;
-  margin-bottom: 50px;
 }
 
 .textInput {
   width: 500px;
   height: 50px;
   background-color: #ffffff;
-  opacity: 0.5;
+  opacity: 0.3;
   font-size: 110%;
 
 }
 
 .calendarPane {
   font-family: 'Apple Chancery';
-  /*background-color: black;*/
   font-size: 200%;
   text-align: center;
   width: 25%;
   float: left;
   height: 100%;
-
+  margin: 10px;
 }
 
 .todoPane {
   text-align: center;
-  /*background-color: yellow;*/
-  width: 45%;
+  width: 50%;
   float: left;
   height: 100%;
 
@@ -72,16 +67,9 @@ p {
 
 .qotdPane {
   text-align: center;
-  width: 30%;
+  width: 25%;
   float: left;
-  /*background-color:#ffffff;*/
-  opacity: 0.5;
-  /*padding:2%;*/
+  height: 100%;
+  margin: 20px;
 
-}
-
-#quoteBox {
-  margin-top: 200px;
-  font-family: cursive;
-  font-size: 200%;
 }

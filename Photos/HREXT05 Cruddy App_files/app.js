@@ -6,17 +6,12 @@ update display with new text value
 
  */
 
- var quotes = ['Good, better, best. Never let it rest. \'Til your good is better and your better is best.', 'With the new day comes new strength and new thoughts.', 'It always seems impossible until it\'s done.', 'Our greatest weakness lies in giving up. The most certain way to succeed is always to try just one more time.', 'If you fell down yesterday, stand up today.', 'If you think you can do it, you can.'];
-
-
-
 $(document).ready(function(){
   console.log('before\n', window.localStorage);
   var todoCounter = 0;
 
-  // Display todos
+
   renderDisplay(localStorage);
-  addQuotes();
 
   // Add Todo
   $('.addTextBtn').on('click', function(){
@@ -34,8 +29,6 @@ $(document).ready(function(){
     } else {
       alert('Similar entry found');
     }
-    $('#theKey').val('');
-    console.log('local', localStorage);
     renderDisplay(localStorage);
   });
 
@@ -48,7 +41,7 @@ $(document).ready(function(){
     todoCounter = 0;
   });
 
-
+  /// ***** renderDisplay(jsonObject); **********
   function renderDisplay(localStorage){
       $('.showText').append('<div id=accordion> </div>');
     for(var key in localStorage){
@@ -62,42 +55,16 @@ $(document).ready(function(){
         header.html(`${counter}`);
         todoContent.html(`<p> ${localStorage[key]} </p>`)
         $('#accordion').append(header,todoContent);
+        console.log(`#content${counter}`)
         $(`#content${counter}`).append(editContent, removeOption);
       }
     }
+
     $('#accordion').accordion({
       collapsible: true
     });
   }
 
-  function getRandomInt(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
-
-  function addQuotes(){
-    var randomNum = getRandomInt(0, quotes.length-1);
-    $('#quoteBox').append(quotes[randomNum]);
-  }
-
-  function reshuffleLocalStorage(localStorage){
-    var order = 0;
-    var keyName = 'theKey';
-    for(var key in localStorage){
-      console.log('key', key);
-      if(localStorage.hasOwnProperty(key)){
-        console.log('keyName', keyName+order);
-        localStorage.setItem(keyName+order, localStorage[key]);
-        localStorage.removeItem(key, localStorage[key]);
-        ++order;
-
-      }
-
-    }
-    console.log('reshuffleLocalStorage', localStorage);
-
-  }
-
-  // addText and clearCache Button
   $(function() {
     $('.addTextBtn').button({icon:'ui-icon-plus'});
     $('.clearCacheBtn').button({icon:'ui-icon-close'});
@@ -106,12 +73,13 @@ $(document).ready(function(){
   // Remove Todo
   $(document).on('click', '.remove', function(event){
     var lsLocation = $(this).parent()[0].id;
+    console.log(typeof lsLocation);
     var deletedLocation =  Number(lsLocation.charAt(lsLocation.length - 1));
     var deletedKey = 'theKey' + (--deletedLocation);
+    console.log(deletedKey);
+    localStorage.removeItem(deletedKey);
     $(this).parent('div').prev('h3').andSelf().remove();
     $('.showText').empty();
-    reshuffleLocalStorage(localStorage);
-    console.log(localStorage);
     renderDisplay(localStorage);
   });
 
@@ -119,6 +87,7 @@ $(document).ready(function(){
   $(document).on('click', '.edit', function(event){
     var txt;
     var lsLocation = $(this).parent()[0].id;
+    console.log(typeof lsLocation);
     var editLocation =  Number(lsLocation.charAt(lsLocation.length - 1));
     var editKey = 'theKey' + (--editLocation);
     var editContent = prompt("Please enter your edit:");
