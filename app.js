@@ -48,7 +48,7 @@ $(document).ready(function(){
   });
 
 
-  function renderDisplay(localStorage){
+  function renderDisplay(localStorage, editLocation){
       $('.showText').append('<div id=accordion> </div>');
     for(var key in localStorage){
       if(localStorage.hasOwnProperty(key)){
@@ -64,9 +64,19 @@ $(document).ready(function(){
         $(`#content${counter}`).append(editContent, removeOption);
       }
     }
-    $('#accordion').accordion({
-      collapsible: true
-    });
+
+    if(editLocation > 0 ){
+      $('#accordion').accordion({
+        collapsible: true,
+        active: editLocation
+      });
+    } else {
+      $('#accordion').accordion({
+        collapsible: true,
+        active: todoCounter-1
+      });
+    }
+
   }
 
   function getRandomInt(min, max) {
@@ -121,7 +131,7 @@ $(document).ready(function(){
         localStorage.setItem(editKey, editContent);
     }
     $('.showText').empty();
-    renderDisplay(localStorage);
+    renderDisplay(localStorage, editLocation);
   })
 
 
